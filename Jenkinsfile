@@ -22,6 +22,7 @@ pipeline {
             steps {
 		            echo 'running UAT deploy'
                 sh '/usr/local/bin/mvn package'
+		    archiveArtifacts artifacts: '*.jar', followSymlinks: false
 		            snDevOpsArtifact(artifactsPayload:"""{"artifacts": [{"name": "${artifactName}","version":"${artifactVersion}","semanticVersion": "${artifactSemVersion}","repositoryName": "${repoName}"}]}""")
 	    	   }
         }
