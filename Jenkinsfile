@@ -20,17 +20,17 @@ pipeline {
         }
         stage('UAT deploy') {
             steps {
-		            echo 'running UAT deploy'
-                sh '/usr/local/bin/mvn package'
-		    archiveArtifacts artifacts: 'target/*.jar', followSymlinks: false
-		            snDevOpsArtifact(artifactsPayload:"""{"artifacts": [{"name": "${artifactName}","version":"${artifactVersion}","semanticVersion": "${artifactSemVersion}","repositoryName": "${repoName}"}]}""")
+		        echo 'running UAT deploy'
+                	sh '/usr/local/bin/mvn package'
+		    	archiveArtifacts artifacts: 'target/*.jar', followSymlinks: false
+		        snDevOpsArtifact(artifactsPayload:"""{"artifacts": [{"name": "${artifactName}","version":"${artifactVersion}","semanticVersion": "${artifactSemVersion}","repositoryName": "${repoName}"}]}""")
 	    	   }
         }
         stage('UAT test') {
           	steps {
-                echo 'running UAT deploy'
-                snDevOpsChange()
-		        }
-        }
+                	echo 'running UAT deploy'
+                	snDevOpsChange()
+		      }
+               }
 	}
 }
